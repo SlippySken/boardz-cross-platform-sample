@@ -3,45 +3,37 @@ import {Http, Headers, RequestOptions} from 'angular2/http';
 import {Router} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+
 import {TokenService} from './token.service';
 import {Configuration} from '../app-config';
-import {LogService} from './log.service';
 import {TokenData} from '../models/tokendata';
-import {SignalRService} from './signalr.service';
 
 @Injectable()
 export class LoginService {
-
     private _lastLoginUnsuccessful: boolean;
 
-    get isAuthenticated(): boolean {
-        return this._tokenService.token !== null;
-    }
-
-    get username(): string {
-        return this._tokenService.username;
-    }
-
     constructor(private _config: Configuration,
-                private _logService: LogService,
                 private _http: Http,
                 private _router: Router,
-                private _tokenService: TokenService,
-                private _signalRService: SignalRService
-    ) {
+                private _tokenService: TokenService) {
         this._tokenService.check()
             .subscribe((value) => {
                 if (!value) this.logout();
             });
+    }
+    
+    public get isAuthenticated(): boolean {
+        return this._tokenService.token !== null;
+    }
+
+    public get username(): string {
+        return this._tokenService.username;
     }
 
     /**
      * Logout the current user (remove token and navigate to unprotected route)
      */
     public logout(): void {
-        this._logService.logDebug('LoginService.logout called');
-
-        this._signalRService.stop();
         this._lastLoginUnsuccessful = false;
         this._tokenService.token = null;
 
@@ -80,12 +72,10 @@ export class LoginService {
     }
 
     handleError(error: TokenData) {
-        this._logService.logDebug('LoginService encountered an error: ' + error);
         this._lastLoginUnsuccessful = true;
     }
 
     saveToken(token: string): void {
-        this._logService.logVerbose('LoginService.saveToken: Saving token ' + token);
         this._lastLoginUnsuccessful = false;
         this._tokenService.token = token;
     }

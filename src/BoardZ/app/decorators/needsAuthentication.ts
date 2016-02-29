@@ -1,5 +1,6 @@
 import {CanActivate, ComponentInstruction, Router} from 'angular2/router';
 import {Injector} from 'angular2/core';
+
 import {appInjector} from '../services/app.injector';
 import {TokenService} from '../services/token.service';
 
@@ -13,6 +14,7 @@ export const NeedsAuthentication = () => {
             return true;
 
         router.navigate(['/Login', { target }]);
+        
         return false;
     });
 }

@@ -1,14 +1,13 @@
 import {Injectable} from 'angular2/core';
 import {Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
+
 import {AuthenticatedHttp} from './authenticated.http';
 import {Game} from '../models/game';
 
 @Injectable()
 export class GamesService {
-
     constructor(private _http: AuthenticatedHttp) {
-
     }
 
     private getRequestOptions() {
@@ -24,11 +23,7 @@ export class GamesService {
     public getAll(): Observable<Game[]> {
         return this._http.get('api/boardgames/list').map(response => (<Game[]>response.json()));
     }
-
-    public deepClone(game: Game): Game {
-        return <Game>JSON.parse(JSON.stringify(game));
-    }
-
+    
     public getGameCount(): Observable<number> {
         return this.getAll().map(games => games.length);
     }
@@ -51,5 +46,9 @@ export class GamesService {
     public deleteGame(id: string): Observable<string> {
         return this._http.delete(`api/boardgames/remove?id=${id}`)
             .map(response => <string>response.text());
+    }
+
+    public deepClone(game: Game): Game {
+        return <Game>JSON.parse(JSON.stringify(game));
     }
 }
