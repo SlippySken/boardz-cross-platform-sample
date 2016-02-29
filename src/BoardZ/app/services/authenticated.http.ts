@@ -14,32 +14,28 @@ export class AuthenticatedHttp extends Http {
         super(_backend, _defaultOptions);
     }
     
-    private buildUrl(appendix: string): string{
-        return `${this._config.apiEndpoint}${appendix}`;
-    }
-    
-    request(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    public request(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
         
         return super.request(url, options);
     }
 
-    get(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    public get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
         
         return super.get(url, options);
     }
 
-    post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+    public post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
         
         return super.post(url, body, options);
     }
 
-    put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+    public put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
         
@@ -52,15 +48,15 @@ export class AuthenticatedHttp extends Http {
         
         return super.delete(url, options);
     }
-    
-    patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
+
+    public patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
         
         return super.patch(url, body, options);
     }
 
-    head(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    public head(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
         
@@ -80,5 +76,9 @@ export class AuthenticatedHttp extends Http {
         }
 
         return options;
+    }
+
+    private buildUrl(appendix: string): string{
+        return `${this._config.apiEndpoint}${appendix}`;
     }
 }

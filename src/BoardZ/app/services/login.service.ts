@@ -71,11 +71,11 @@ export class LoginService {
         });
     }
 
-    handleError(error: TokenData) {
+    public handleError(error: TokenData) {
         this._lastLoginUnsuccessful = true;
     }
 
-    saveToken(token: string): void {
+    public saveToken(token: string): void {
         this._lastLoginUnsuccessful = false;
         this._tokenService.token = token;
     }
