@@ -34,11 +34,11 @@ export class LoginForm implements CanDeactivate {
             );
     }
 
-    setError(value: boolean) {
+    public setError(value: boolean) {
         this._hasError = value;
     }
 
-    routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
+    public routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
         return !this._hasError && this._loginService.isAuthenticated;
     }
 }

@@ -9,17 +9,7 @@ import {Game} from '../models/game';
 export class GamesService {
     constructor(private _http: AuthenticatedHttp) {
     }
-
-    private getRequestOptions() {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Accept', 'text/plain');
-        headers.append('Accept', '*/*');
-        headers.append('Content-Type', 'application/json;charset=UTF-8');
-
-        return { headers: headers };
-    }
-
+    
     public getAll(): Observable<Game[]> {
         return this._http.get('api/boardgames/list').map(response => (<Game[]>response.json()));
     }
@@ -50,5 +40,15 @@ export class GamesService {
 
     public deepClone(game: Game): Game {
         return <Game>JSON.parse(JSON.stringify(game));
+    }
+
+    private getRequestOptions() {
+        let headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('Accept', 'text/plain');
+        headers.append('Accept', '*/*');
+        headers.append('Content-Type', 'application/json;charset=UTF-8');
+
+        return { headers: headers };
     }
 }

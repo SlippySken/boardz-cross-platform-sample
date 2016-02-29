@@ -12,7 +12,7 @@ export class Sidebar {
     constructor() {
     }
 
-    toggleSidebar(): void {
+    public toggleSidebar(): void {
         this.expanded = !this.expanded;
     }
 }

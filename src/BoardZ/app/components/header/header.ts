@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
         });
     }
     
-    logout(event): void {
+    public logout(event): void {
         event.preventDefault();
 
         this.loginService.logout();
