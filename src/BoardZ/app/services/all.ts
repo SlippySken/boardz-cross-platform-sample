@@ -6,8 +6,6 @@ import {AuthenticatedHttp} from './authenticated.http';
 import {LoginService} from './login.service';
 import {GamesService} from './games.service';
 
-declare var window;
-
 export var APP_SERVICES = [
     provide(ConnectionBackend, { useClass: XHRBackend }),
     Configuration,
