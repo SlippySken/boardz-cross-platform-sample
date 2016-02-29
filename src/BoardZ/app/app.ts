@@ -6,13 +6,6 @@ import {Sidebar} from './components/sidebar/sidebar';
 import {HeaderComponent} from './components/header/header';
 import {Games} from './components/games/games';
 import {APP_SERVICES} from './services/all';
-import {LoginService} from './services/login.service';
-
-interface AdminLteFix extends Window {
-    initAdminLTE():void;
-}
-
-declare var window: AdminLteFix;
 
 @Component({
     selector: 'boardz-app',
@@ -22,16 +15,39 @@ declare var window: AdminLteFix;
 })
 @RouteConfig([
     { path: '/login', component: LoginForm, name: 'Login', data: { displayName: 'Login' } },
-    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' }, useAsDefault: true },
+    { path: '/games/...', component: Games, name: 'Games', data: { displayName: 'Games' }, useAsDefault: true }
 ])
 export class BoardzApp implements AfterViewInit {
-
     ngAfterViewInit(): any {
         if (window.initAdminLTE) {
             window.initAdminLTE();
         }
     }
-
-    constructor(private _loginService: LoginService) {
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+interface AdminLteFix extends Window {
+    initAdminLTE():void;
+}
+declare var window: AdminLteFix;
