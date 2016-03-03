@@ -8,7 +8,6 @@ import {Game} from '../../models/game';
 import {LogService} from '../../services/log.service';
 import {GamesService} from '../../services/games.service';
 import {NotificationService} from '../../services/notification.service';
-import {SignalRService} from '../../services/signalr.service';
 import {PlayersService} from '../../services/players.service';
 import {Player} from '../../models/player';
 import {GeoLocation} from '../../models/geolocation';
@@ -41,7 +40,6 @@ export class GameDetails implements OnInit {
                 private _routeParams: RouteParams,
                 private _notificationService: NotificationService,
                 private _playersService: PlayersService,
-                private _signalRService: SignalRService,
                 private _loginService: LoginService,
                 private _injector: Injector) {
         this._diagnosticEnabled = _injector.get('inDiagnosticsMode');
@@ -140,7 +138,6 @@ export class GameDetails implements OnInit {
             return;
         }
         this._sending = true;
-        this._signalRService.sendIAmGaming(this.model.name);
         var player = new Player();
         player.name = this._loginService.username;
         player.boardGameId  = this.model.id;
