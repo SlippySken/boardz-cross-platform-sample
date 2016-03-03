@@ -1,15 +1,13 @@
 import {Injectable} from 'angular2/core';
-import {Http, ConnectionBackend, RequestOptions, RequestOptionsArgs, Response, Headers} from 'angular2/http';
+import {Http, RequestOptionsArgs, Response, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {Configuration} from '../app-config';
 import {TokenService} from './token.service';
 
-
 @Injectable()
-export class AuthenticatedHttp extends Http {
+export class AuthenticatedHttp {
 
-    constructor(protected _backend: ConnectionBackend, protected _defaultOptions: RequestOptions, protected _config: Configuration, protected _tokenService: TokenService) {
-        super(_backend, _defaultOptions);
+    constructor(private _http: Http, private _config: Configuration, private _tokenService: TokenService) {
     }
     
     private buildUrl(appendix: string): string{
@@ -19,43 +17,43 @@ export class AuthenticatedHttp extends Http {
     request(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
-        return super.request(url, options);
+        return this._http.request(url, options);
     }
 
     get(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
-        return super.get(url, options);
+        return this._http.get(url, options);
     }
 
     post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
-        return super.post(url, body, options);
+        return this._http.post(url, body, options);
     }
 
     put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
-        return super.put(url, body, options);
+        return this._http.put(url, body, options);
     }
 
     delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
-        return super.delete(url, options);
+        return this._http.delete(url, options);
     }
     
     patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
-        return super.patch(url, body, options);
+        return this._http.patch(url, body, options);
     }
 
     head(url: string, options?: RequestOptionsArgs): Observable<Response> {
         url = this.buildUrl(url);
         options = this.prepareOptions(options);
-        return super.head(url, options);
+        return this._http.head(url, options);
     }
 
     protected prepareOptions(options: RequestOptionsArgs): RequestOptionsArgs {
