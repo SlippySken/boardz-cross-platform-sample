@@ -1,4 +1,4 @@
-# Sample application for various “Cross-Platform HTML5 – in Action!” workshops
+# Sample application for various “Cross-Platform HTML5 – in Action!” workshops 
 
 ## Requirements
 * [NodeJS](http://nodejs.org) NodeJS
